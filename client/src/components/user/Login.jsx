@@ -1,28 +1,8 @@
 import gif02 from "../../assets/02.gif";
 
-import { login } from "../../apiCalls/usersApiCalls";
 import Form from "../Form";
-import { useContext, useEffect } from "react";
-import { DataContext } from "../../store/context";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const { dispatchUsers, usersState } = useContext(DataContext);
-
-  const navigate = useNavigate();
-
-  const submitHandler = async (data) => {
-    try {
-      await login(dispatchUsers, data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    usersState.isUserLoggedIn && navigate("/records");
-  }, [usersState.isUserLoggedIn]);
-
   const inputs = [
     {
       name: "email",
@@ -53,7 +33,7 @@ const Login = () => {
   return (
     <div className='layout'>
       <Form
-        submitHandler={submitHandler}
+        onSubmit={() => console.log("submit handler")}
         inputs={inputs}
         buttonText='Log In'
         heading='Welcome back!'

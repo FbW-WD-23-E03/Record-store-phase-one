@@ -5,6 +5,7 @@ const successHandler = (res, status, data) => {
     status,
     data,
   };
+
   res.status(status).json(response);
 };
 

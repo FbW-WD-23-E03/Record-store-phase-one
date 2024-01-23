@@ -1,22 +1,13 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { MdDelete } from "react-icons/md";
-import { DataContext } from "../../store/context";
-import { deleteCartItem, getCartData } from "../../apiCalls/cartsApiCalls";
 
 const CartItemsList = () => {
-  const { cartsState, dispatchCarts, usersState } = useContext(DataContext);
+  const [cartState] = useState(false);
 
-  const deleteFromCartHandler = async (recordId) => {
-    const cartId = usersState.user?.cartId;
-
-    if (cartsState && cartsState.items) {
-      await deleteCartItem(dispatchCarts, recordId, cartId);
-    }
-  };
   return (
     <ul className='cart-items-list'>
-      {cartsState.items.length > 0 &&
-        cartsState.items?.map(({ record, quantity }) => {
+      {cartState.items.length > 0 &&
+        cartState.items?.map(({ record, quantity }) => {
           const { _id, title, artist, img } = record;
 
           return (
@@ -32,7 +23,7 @@ const CartItemsList = () => {
 
                 <MdDelete
                   className='cart-item__remove'
-                  onClick={() => deleteFromCartHandler(_id)}
+                  onClick={() => console.log("delete from cart handler")}
                 />
               </div>
             </li>

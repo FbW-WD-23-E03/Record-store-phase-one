@@ -1,34 +1,13 @@
-import React, { useContext } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FaRecordVinyl } from "react-icons/fa";
 
 import CartIcon from "./cart/CartIcon";
 import Form from "./SearchRecord";
-import { DataContext } from "../store/context";
-import { logout } from "../apiCalls/usersApiCalls";
 
 const Nav = () => {
-  const { usersState, dispatchUsers } = useContext(DataContext);
-  const { isUserLoggedIn } = usersState;
-
   const location = useLocation();
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    await logout(dispatchUsers);
-    navigate("/");
-  };
-
-  const LoggedUsersLinks = () => {
-    return (
-      <>
-        <Link className='button-bg' onClick={handleLogout}>
-          Logout
-        </Link>
-      </>
-    );
-  };
 
   const GuestLinks = () => (
     <>
@@ -62,8 +41,8 @@ const Nav = () => {
         )}
 
         <div className='items'>
-          {isUserLoggedIn ? <LoggedUsersLinks /> : <GuestLinks />}
-          {isUserLoggedIn && <CartIcon />}
+          <GuestLinks />
+          <CartIcon />
         </div>
       </ul>
     </motion.nav>

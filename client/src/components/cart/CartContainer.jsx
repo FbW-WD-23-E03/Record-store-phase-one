@@ -1,16 +1,9 @@
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import CartItemsList from "./CartItemsList";
 import { motion } from "framer-motion";
-import { DataContext } from "../../store/context";
 
-const CartContainer = ({ handleToggleCart }) => {
-  const { cartsState } = useContext(DataContext);
-
-  const getTotalPrice = () =>
-    cartsState.items.reduce(
-      (total, item) => total + item.record?.price * item.quantity,
-      0
-    );
+const CartContainer = () => {
+  const [cartState] = useState(false);
 
   return (
     <motion.div
@@ -18,7 +11,7 @@ const CartContainer = ({ handleToggleCart }) => {
       animate={{ y: 0, x: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {cartsState.isOpen && (
+      {cartState.isOpen ? (
         <div
           className='cart-sidebar'
           style={{ height: "100vh", transition: "1s" }}
@@ -26,13 +19,13 @@ const CartContainer = ({ handleToggleCart }) => {
           <button
             type='button'
             className='close-button'
-            onClick={handleToggleCart}
+            onClick={() => console.log("toggle cart")}
           >
             &times;
           </button>
-          {cartsState.items ? (
+          {cartState.items ? (
             <>
-              <p className='cart-price'>Total: €{getTotalPrice()}</p>
+              <p className='cart-price'>Total: € 0</p>
               <div className='cart-body'>
                 <CartItemsList />
               </div>
@@ -46,7 +39,7 @@ const CartContainer = ({ handleToggleCart }) => {
             </>
           )}
         </div>
-      )}
+      ) : null}
     </motion.div>
   );
 };

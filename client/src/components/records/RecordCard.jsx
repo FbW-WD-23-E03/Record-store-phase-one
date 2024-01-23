@@ -1,21 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { DataContext } from "../../store/context";
-import { addCartItem, getCartData } from "../../apiCalls/cartsApiCalls";
 
 const RecordCard = ({ record, index }) => {
   const { title, img, price, artist, year } = record;
-  const { usersState, dispatchCarts, cartsState } = useContext(DataContext);
 
-  const cartId = usersState.user?.cartId;
-
-  const addToCartHandler = async (record) => {
-    if (usersState.isUserLoggedIn) {
-      await addCartItem(dispatchCarts, cartsState, record, cartId);
-      await getCartData(dispatchCarts, cartId);
-    }
-  };
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -38,7 +27,9 @@ const RecordCard = ({ record, index }) => {
       <div className='record-footer'>
         <p className='record-footer-price'>{price} €</p>
         <div className='record-footer-icon'>
-          <FaShoppingCart onClick={() => addToCartHandler(record)} />
+          <FaShoppingCart
+            onClick={() => console.log("Add to cart handler goes here")}
+          />
         </div>
       </div>
     </motion.div>

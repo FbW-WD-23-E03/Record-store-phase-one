@@ -1,34 +1,15 @@
-import axios from "axios";
-
-export const signup = async (dispatchUsers, data) => {
+export const signup = async () => {
   try {
-    const response = await axios.post(
-      "http://localhost:8000/users/signup",
-      data
-    );
-    dispatchUsers({ type: "LOGIN_SUCCESS", payload: response.data });
+    console.log("signup");
   } catch (error) {
-    console.log(error);
+    console.log("signup");
   }
 };
 
-export const login = async (dispatchUsers, data) => {
+export const login = async (dispatch, data) => {
   try {
-    const response = await axios.post(
-      "http://localhost:8000/users/login",
-      data
-    );
-
-    dispatchUsers({ type: "LOGIN_SUCCESS", payload: response.data });
+    console.log("login");
   } catch (error) {
-    console.log(error);
-  }
-};
-
-export const logout = async (dispatchUsers) => {
-  try {
-    dispatchUsers({ type: "LOGOUT" });
-  } catch (error) {
-    console.log(error);
+    console.log("login");
   }
 };

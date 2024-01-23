@@ -1,28 +1,8 @@
-import { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { signup } from "../../apiCalls/usersApiCalls";
 import gif01 from "../../assets/01.gif";
-import { DataContext } from "../../store/context";
+
 import Form from "../Form";
 
 const Signup = () => {
-  const { dispatchUsers, usersState } = useContext(DataContext);
-
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    usersState.isUserLoggedIn && navigate("/records");
-  }, [usersState.isUserLoggedIn, navigate]);
-
-  const submitHandler = async (data) => {
-    try {
-      await signup(dispatchUsers, data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   const inputs = [
     {
       name: "firstName",
@@ -62,7 +42,7 @@ const Signup = () => {
   return (
     <div className='layout'>
       <Form
-        submitHandler={submitHandler}
+        onSubmit={() => console.log("submit handler")}
         inputs={inputs}
         buttonText='Sign Up'
         heading='Hello there'

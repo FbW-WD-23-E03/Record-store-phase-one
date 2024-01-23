@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 
-const Form = ({ submitHandler, inputs, buttonText, heading }) => {
+const Form = ({ onSubmit, inputs, buttonText, heading }) => {
   const {
     register,
     handleSubmit,
@@ -8,7 +8,7 @@ const Form = ({ submitHandler, inputs, buttonText, heading }) => {
   } = useForm();
 
   return (
-    <form className='form-container' onSubmit={handleSubmit(submitHandler)}>
+    <form className='form-container' onSubmit={handleSubmit(onSubmit)}>
       <h1>{heading}</h1>
       {inputs.map((input) => (
         <div key={input.name} className='info'>

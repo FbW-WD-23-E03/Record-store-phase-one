@@ -1,13 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecordCard from "./RecordCard";
-import { DataContext } from "../../store/context";
+import data from "../../records";
 
 const RecordsList = () => {
   const { genre } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-
-  const { recordsState, cartsState } = useContext(DataContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -16,12 +14,12 @@ const RecordsList = () => {
   }, []);
 
   const filteredData = genre
-    ? recordsState.data.filter(
+    ? data.filter(
         (record) => record.genre.toLowerCase() === genre.toLowerCase()
       )
-    : recordsState.data;
+    : data;
 
-  const containerWidth = cartsState.isOpen ? `calc(100vw - 300px)` : "100%";
+  // const containerWidth = cartState.isOpen ? `calc(100vw - 300px)` : "100%";
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -30,7 +28,7 @@ const RecordsList = () => {
   return filteredData.length > 0 ? (
     <div
       className='records-container'
-      style={{ width: containerWidth, transition: "1s" }}
+      // style={{ width: containerWidth, transition: "1s" }}
     >
       {filteredData.map((record, index) => (
         <RecordCard key={index} record={record} index={index} />
